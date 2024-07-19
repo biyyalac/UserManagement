@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.view.KeyEventDispatcher.Component
 
 val LocalOnBackPressedDispatcher=staticCompositionLocalOf<OnBackPressedDispatcherOwner?> {null
-
 }
 
 class ComposableBackNavigationHandler(enabled: Boolean): OnBackPressedCallback(enabled) {
