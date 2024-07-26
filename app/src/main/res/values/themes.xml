@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.ComposeLoginRegistration" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="my_splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#E69319</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_vector_animated</item>
+        <item name="postSplashScreenTheme">@style/Theme.ComposeLoginRegistration</item>
+
+    </style>
 </resources>

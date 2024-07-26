@@ -5,17 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,8 +29,8 @@ import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
-fun LoginButtonComponent(value:String="Login") {
-    Button(onClick = {}, modifier = Modifier
+fun LoginButtonComponent(value: String = "Login",onclicked:()->Unit= {  }) {
+    Button(onClick = onclicked, modifier = Modifier
         .fillMaxWidth()
         .heightIn(48.dp)
         .background(Color.Transparent)
@@ -76,13 +72,13 @@ fun NormalTextComponent(text:String="") {
 
 @Preview
 @Composable
-fun HeaderTextComponent(text:String="") {
+fun HeaderTextComponent(text:String="",color:Color=Color.Black) {
     Text(text,
         modifier = Modifier
             .heightIn()
             .fillMaxWidth(),
         style = TextStyle(
-            color = Color.Black,
+            color =color,
             fontSize = 30.sp,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center,

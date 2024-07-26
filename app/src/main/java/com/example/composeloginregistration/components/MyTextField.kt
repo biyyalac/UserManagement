@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -43,7 +44,11 @@ fun MyTextField(placeholder: String, onTextChange: (String) -> Unit, leadingIcon
     var text by remember { mutableStateOf("") }
     OutlinedTextField(
         value = text,
-        onValueChange = onTextChange,
+        onValueChange = {
+            onTextChange(it)
+            text=it
+
+        },
         modifier = Modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Gray,
@@ -55,7 +60,7 @@ fun MyTextField(placeholder: String, onTextChange: (String) -> Unit, leadingIcon
     )
 }
 @Composable
-fun PasswordTextField(placeholder: String, /*onTextChange: (String) -> Unit, */leadingIcon: ImageVector) {
+fun PasswordTextField(placeholder: String, onTextChange: (String) -> Unit, leadingIcon: ImageVector) {
     val ctxt= LocalContext.current
 
     var text by remember { mutableStateOf("") }
@@ -66,6 +71,7 @@ fun PasswordTextField(placeholder: String, /*onTextChange: (String) -> Unit, */l
         value = text,
         onValueChange = {
             text=it
+            onTextChange(it)
         },
         modifier = Modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
@@ -88,8 +94,6 @@ fun PasswordTextField(placeholder: String, /*onTextChange: (String) -> Unit, */l
             }
         },
         visualTransformation = if (icon) VisualTransformation.None else PasswordVisualTransformation()
-
-
     )
 }
 
@@ -129,6 +133,47 @@ fun ClickBleComponent(onTextClicked:(String)->Unit) {
         clickbleText.getStringAnnotations(it,it).
                 firstOrNull()?.also {it->
                     if(it.item=="privacyPolicy"||it.item=="termsCondition")
+                     onTextClicked(it.item)
+
+            Log.e("Screen Click","Screen Click ${it.item}")
+        }
+    })
+}
+@Preview
+@Composable
+fun ClickBleDontHaveText(onTextClicked:(String)->Unit= {  }) {
+    val initlaText="Don't have account? "
+    val signup="SignUp"
+    val clickbleText= buildAnnotatedString {
+        append(initlaText)
+        withStyle(style = SpanStyle(color = Color.DarkGray)){
+            pushStringAnnotation(tag = "signup", annotation = "signup")
+            append(signup)
+        }
+    }
+    ClickableText(modifier = Modifier.fillMaxWidth().wrapContentWidth(), text = clickbleText, onClick = {
+        clickbleText.getStringAnnotations(it,it).
+                firstOrNull()?.also {it->
+                     onTextClicked(it.item)
+
+            Log.e("Screen Click","Screen Click ${it.item}")
+        }
+    })
+}
+@Composable
+fun ClickBleAlreadyHaveAccount(onTextClicked:(String)->Unit) {
+    val initlaText="Already have account? "
+    val Sigin="Sign In"
+    val clickbleText= buildAnnotatedString {
+        append(initlaText)
+        withStyle(style = SpanStyle(color = Color.DarkGray)){
+            pushStringAnnotation(tag = "signin", annotation = "signin")
+            append(Sigin)
+        }
+    }
+    ClickableText(modifier = Modifier.fillMaxWidth().wrapContentWidth(), text = clickbleText, onClick = {
+        clickbleText.getStringAnnotations(it,it).
+                firstOrNull()?.also {it->
                      onTextClicked(it.item)
 
             Log.e("Screen Click","Screen Click ${it.item}")

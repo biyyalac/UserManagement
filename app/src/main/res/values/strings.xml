@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ComposeLoginRegistration</string>
+    <string name="preference_file_key">my_pref</string>
 </resources>
