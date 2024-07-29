@@ -1,6 +1,8 @@
 package com.example.composeloginregistration.app
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeloginregistration.navigation.AppRouter
 import com.example.composeloginregistration.navigation.Screen
 import com.example.composeloginregistration.screens.DashBoardScreen
+import com.example.composeloginregistration.screens.GoogleMaps
 import com.example.composeloginregistration.screens.auth.SignInScreen
 import com.example.composeloginregistration.screens.auth.SignUpScreen
 import com.example.composeloginregistration.screens.TermsAndConditionsScreen
@@ -26,6 +29,7 @@ import com.example.composeloginregistration.screens.auth.AppViewModelProvider
 import com.example.composeloginregistration.screens.auth.viewmodel.AuthenticationViewModel
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppComponent(authenticationViewModel: AuthenticationViewModel = viewModel(factory = AppViewModelProvider.factory)){
     val ctxt= LocalContext.current
@@ -65,7 +69,9 @@ fun AppComponent(authenticationViewModel: AuthenticationViewModel = viewModel(fa
                     is Screen.signUpScreen -> SignUpScreen(authenticationViewModel)
                     is Screen.termsAndConditionsScreen -> TermsAndConditionsScreen()
                     is Screen.signinScreen -> SignInScreen(authenticationViewModel)
+                    is Screen.mapsScreen -> GoogleMaps(authenticationViewModel)
                     is Screen.dashboardScreen -> DashBoardScreen(authenticationViewModel)
+
                 }
 
             }

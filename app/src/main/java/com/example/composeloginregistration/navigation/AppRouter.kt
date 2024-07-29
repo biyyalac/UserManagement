@@ -8,6 +8,7 @@ sealed class Screen{
     object termsAndConditionsScreen: Screen()
     object signinScreen: Screen()
     object dashboardScreen: Screen()
+    object mapsScreen: Screen()
 }
 
 object AppRouter{

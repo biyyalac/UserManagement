@@ -81,5 +81,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation ("com.google.maps.android:maps-compose:6.1.0")
 
 }

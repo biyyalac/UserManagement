@@ -2,9 +2,11 @@ package com.example.composeloginregistration.screens
 
 import android.os.Build
 import android.text.format.Time
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +36,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeloginregistration.R
 import com.example.composeloginregistration.components.HeaderTextComponent
 import com.example.composeloginregistration.components.NormalTextComponent
+import com.example.composeloginregistration.navigation.AppRouter
+import com.example.composeloginregistration.navigation.Screen
 import com.example.composeloginregistration.screens.auth.AppViewModelProvider
 import com.example.composeloginregistration.screens.auth.viewmodel.AuthenticationViewModel
 import kotlinx.coroutines.delay
@@ -97,7 +101,10 @@ private fun DashboardPreview() {
 
     Column {
         Row (modifier = Modifier.padding(20.dp)){
-            Card(modifier = Modifier.padding(10.dp)) {
+            Card(modifier = Modifier.padding(10.dp).clickable {
+                AppRouter.navigateTo(Screen.termsAndConditionsScreen)
+                Log.e("Clickable","Clickable")
+            }) {
                 Column(verticalArrangement = Arrangement.Center,modifier = Modifier
                     .requiredWidth(120.dp)
                     .heightIn(120.dp), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -105,7 +112,9 @@ private fun DashboardPreview() {
                     NormalTextComponent("Location")
                 }
             }
-            Card(modifier = Modifier.padding(10.dp)) {
+            Card(modifier = Modifier.padding(10.dp).clickable {
+
+            }) {
                 Column(verticalArrangement = Arrangement.Center,modifier = Modifier
                     .requiredWidth(120.dp)
                     .heightIn(120.dp), horizontalAlignment = Alignment.CenterHorizontally) {
