@@ -8,4 +8,5 @@ interface UserRepositories {
     suspend fun insertUser(userEntity: UserEntity):Long
      fun getchAll(): Flow<List<UserEntity>>
      fun checkUser(email:String,password:String): Flow<List<UserEntity>>
+     fun checkUser(id:String): Flow<List<UserEntity>>
 }

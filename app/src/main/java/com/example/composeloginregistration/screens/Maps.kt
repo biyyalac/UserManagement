@@ -12,6 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.example.composeloginregistration.navigation.AppRouter
+import com.example.composeloginregistration.navigation.Screen
+import com.example.composeloginregistration.navigation.SystemBackButtonHandler
 import com.example.composeloginregistration.screens.auth.viewmodel.AuthenticationViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.LocationSource
@@ -83,6 +86,9 @@ fun GoogleMaps(authenticationViewModel: AuthenticationViewModel) {
             title = "Singapore",
             snippet = "Marker in Singapore"
         )
+    }
+    SystemBackButtonHandler{
+        AppRouter.navigateTo(Screen.dashboardScreen)
     }
 }
  fun newLocation(): Location {

@@ -19,4 +19,6 @@ interface UserDao {
 
     @Query("select * from user where email=:email and password=:password")
     fun checkUser(email:String,password:String):Flow<List<UserEntity>>
+    @Query("select * from user where id=:id")
+    fun checkUser(id:String):Flow<List<UserEntity>>
 }

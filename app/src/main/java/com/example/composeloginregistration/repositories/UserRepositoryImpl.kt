@@ -17,4 +17,7 @@ class UserRepositoryImpl(var userDao: UserDao):UserRepositories {
     override fun checkUser(email: String, password: String): Flow<List<UserEntity>> {
       return  userDao.checkUser(email,password)
     }
+    override fun checkUser(id: String): Flow<List<UserEntity>> {
+      return  userDao.checkUser(id)
+    }
 }

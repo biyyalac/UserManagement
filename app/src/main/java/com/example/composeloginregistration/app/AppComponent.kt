@@ -31,11 +31,12 @@ import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppComponent(authenticationViewModel: AuthenticationViewModel = viewModel(factory = AppViewModelProvider.factory)){
+fun AppComponent(authenticationViewModel: AuthenticationViewModel) {
     val ctxt= LocalContext.current
     val coroutineScope= rememberCoroutineScope()
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
+
     LaunchedEffect(key1 = ctxt) {
         authenticationViewModel.responseHandler.collect{
             Log.e("Response Message","Response Message ${it.msg}")
@@ -46,6 +47,9 @@ fun AppComponent(authenticationViewModel: AuthenticationViewModel = viewModel(fa
             if(it.resCode==200)
             {
                 AppRouter.navigateTo(Screen.signinScreen)
+            }else if(it.resCode==202)
+            {
+                AppRouter.navigateTo(Screen.dashboardScreen)
             }
         }
     }
@@ -60,10 +64,10 @@ fun AppComponent(authenticationViewModel: AuthenticationViewModel = viewModel(fa
         ) {
             Crossfade(targetState = AppRouter.currentScreen) {
 
-                if(authenticationViewModel.application.getUserId()?.isNotEmpty() == true)
+              /*  if(authenticationViewModel.application.getUserId()?.isNotEmpty() == true)
                 {
                     it.value=Screen.dashboardScreen
-                }
+                }*/
 
                 when (it.value) {
                     is Screen.signUpScreen -> SignUpScreen(authenticationViewModel)

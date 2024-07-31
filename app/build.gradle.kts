@@ -3,18 +3,37 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.firebase.appdistribution)
+    alias(libs.plugins.google.gms.google.services)
+    // alias(libs.plugins.google.firebase.appdistribution)
+   // alias(libs.plugins.google.gms.google.services)
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("/Users/biyyalac/Desktop/123.jks")
+            storePassword = "123456"
+            keyAlias = "key0"
+            keyPassword = "123456"
+        }
+        create("release") {
+            storeFile = file("/Users/biyyalac/Desktop/123.jks")
+            storePassword = "123456"
+            keyAlias = "key0"
+            keyPassword = "123456"
+        }
+
+    }
     namespace = "com.example.composeloginregistration"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.composeloginregistration"
+        applicationId = "com.compose.firebase"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -29,6 +48,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            firebaseAppDistribution {
+                releaseNotesFile="releasenotes.txt"
+                testers="mouli150388@gmail.com,38ravi38@gmail.com,lalitha.jlk@gmail.com"//,38ravi38@gmail.com
+                serviceCredentialsFile="appdistribution-431005-firebase-adminsdk-k2v4n-5fa1e468c0.json"
+            }
         }
     }
     compileOptions {

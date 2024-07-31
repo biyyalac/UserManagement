@@ -76,6 +76,7 @@ class AuthenticationViewModel(
     {
         userRepositoryImpl.getchAll().flowOn(Dispatchers.IO).collect{
             Log.e("Database Size","Database Size ${it.size}}" )
+
         }
 
     }
@@ -96,6 +97,25 @@ class AuthenticationViewModel(
         }else {
             application.setUser(it.get(0).id.toString())
             responseHandler.emit(ResponseHandler("Login Successfully", 200))
+
+        }
+    }
+
+
+    }
+    suspend fun checkUser(id:String)
+    {
+
+    userRepositoryImpl.checkUser(id).collect{
+        Log.e("listData","listData users list ${it?.size}}")
+        if(it==null||it?.isEmpty()==true)
+        {
+            responseHandler.emit(ResponseHandler("User Doesn't exist, Please check your credentials",201))
+
+        }else {
+            application.setUser(it.get(0).id.toString())
+            responseHandler.emit(ResponseHandler("Login Successfully", 202))
+
         }
     }
 

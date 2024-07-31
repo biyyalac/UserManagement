@@ -102,7 +102,7 @@ private fun DashboardPreview() {
     Column {
         Row (modifier = Modifier.padding(20.dp)){
             Card(modifier = Modifier.padding(10.dp).clickable {
-                AppRouter.navigateTo(Screen.termsAndConditionsScreen)
+                AppRouter.navigateTo(Screen.mapsScreen)
                 Log.e("Clickable","Clickable")
             }) {
                 Column(verticalArrangement = Arrangement.Center,modifier = Modifier
