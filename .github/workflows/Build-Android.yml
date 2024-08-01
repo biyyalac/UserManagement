@@ -1,0 +1,28 @@
+name: Android-Build
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Build Release
+        run: ./gradlew assembleRelease
+
+      - name: List File
+        run: ls -lrt app/build/output/apk/release
+
+
