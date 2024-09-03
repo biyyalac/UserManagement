@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.composeloginregistration.MyApplication
 import com.example.composeloginregistration.database.entities.UserEntity
 import com.example.composeloginregistration.repositories.UserRepositoryImpl
+import com.example.composeloginregistration.repositories.remote.UserRemoteRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flowOn
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class AuthenticationViewModel(
     val userRepositoryImpl: UserRepositoryImpl,
+    val userRemoteRepositories: UserRemoteRepositoryImpl,
     val application: MyApplication
 ):ViewModel() {
 
@@ -62,13 +65,26 @@ class AuthenticationViewModel(
     suspend fun insertUser(userEntity: UserEntity)
     {
         if(validateUserInput(userEntity)) {
-            var insert = userRepositoryImpl.insertUser(userEntity) as Long
+           /* var insert = userRepositoryImpl.insertUser(userEntity) as Long
             Log.e("insert","insert $insert")
             if(insert>0)
             {
                 responseHandler.emit(ResponseHandler("User registered successfully",200))
-            }
+            }*/
+
+           userRemoteRepositories.insertUser(userEntity,object:RemoteResponseHandler{
+               override fun onRemoteResponse(msg: String, resCode: Int) {
+                   viewModelScope.launch {
+                       responseHandler.emit(ResponseHandler(msg,200))
+                   }
+
+
+               }
+
+           })
         }
+
+
 
 
     }
@@ -88,7 +104,7 @@ class AuthenticationViewModel(
              responseHandler.emit(ResponseHandler("Enter valid credentials",201))
              return
          }
-    userRepositoryImpl.checkUser(email,password).collect{
+           /* userRepositoryImpl.checkUser(email,password).collect{
         Log.e("listData","listData users list ${it?.size}}")
         if(it==null||it?.isEmpty()==true)
         {
@@ -98,8 +114,18 @@ class AuthenticationViewModel(
             application.setUser(it.get(0).id.toString())
             responseHandler.emit(ResponseHandler("Login Successfully", 200))
 
-        }
-    }
+        }*/
+
+        userRemoteRepositories.signinUser(UserEntity(email=email,password=password),object:RemoteResponseHandler {
+            override fun onRemoteResponse(msg: String, resCode: Int) {
+                viewModelScope.launch {
+                    responseHandler.emit(ResponseHandler(msg, resCode))
+                }
+
+            }
+        })
+
+
 
 
     }
@@ -129,4 +155,8 @@ class AuthenticationViewModel(
         )
 
     data class ResponseHandler(val msg:String="",val resCode:Int=0)
+    interface RemoteResponseHandler{
+        fun onRemoteResponse(msg:String,resCode:Int)
+
+    }
 }

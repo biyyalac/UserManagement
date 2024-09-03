@@ -41,8 +41,12 @@ import com.example.composeloginregistration.components.MyTextField
 import com.example.composeloginregistration.components.NormalTextComponent
 import com.example.composeloginregistration.components.PasswordTextField
 import com.example.composeloginregistration.screens.auth.viewmodel.AuthenticationViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 @Preview
 @Composable
@@ -56,6 +60,7 @@ fun SignUpScreen(authenticationViewModel: AuthenticationViewModel = viewModel(fa
     val snackbarHostState = remember { SnackbarHostState() }
     var userEntity=authenticationViewModel.userInputState.userEntity*/
     var userEntity=authenticationViewModel.userInputState.userEntity
+
     LaunchedEffect(key1 = ctxt) {
         authenticationViewModel.responseHandler.collect{
 

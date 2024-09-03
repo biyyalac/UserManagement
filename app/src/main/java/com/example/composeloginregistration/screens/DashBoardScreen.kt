@@ -56,7 +56,7 @@ fun DashBoardScreen(authenticationViewModel: AuthenticationViewModel = viewModel
             .background(
                 Brush.linearGradient(listOf(Color.Blue, Color.Red)),
             ), contentAlignment = Alignment.Center,){
-            HeaderTextComponent("DashBoard",Color.White)
+            HeaderTextComponent("DashBoard ",Color.White)
         }
     }){contentPadding->
         Surface(onClick = {}, modifier = Modifier
@@ -95,7 +95,7 @@ fun ClockPreview() {
     }
 
 }
-@Preview
+@Preview(fontScale = 2.0f)
 @Composable
 private fun DashboardPreview() {
 
@@ -113,7 +113,7 @@ private fun DashboardPreview() {
                 }
             }
             Card(modifier = Modifier.padding(10.dp).clickable {
-
+                AppRouter.navigateTo(Screen.notesScreen)
             }) {
                 Column(verticalArrangement = Arrangement.Center,modifier = Modifier
                     .requiredWidth(120.dp)

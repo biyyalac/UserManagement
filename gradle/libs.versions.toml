@@ -16,6 +16,7 @@ lifecycleViewmodel = "2.8.3"
 org-jetbrains-kotlin-android = "2.0.0"
 googleFirebaseAppdistribution = "5.0.0"
 googleGmsGoogleServices = "4.4.2"
+firebaseAuth = "23.0.0"
 
 
 [libraries]
@@ -38,6 +39,7 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodel" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 
 [plugins]

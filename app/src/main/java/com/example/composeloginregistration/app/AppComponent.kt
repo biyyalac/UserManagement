@@ -27,6 +27,7 @@ import com.example.composeloginregistration.screens.auth.SignUpScreen
 import com.example.composeloginregistration.screens.TermsAndConditionsScreen
 import com.example.composeloginregistration.screens.auth.AppViewModelProvider
 import com.example.composeloginregistration.screens.auth.viewmodel.AuthenticationViewModel
+import com.example.composeloginregistration.screens.notes.NotesScreen
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -75,6 +76,7 @@ fun AppComponent(authenticationViewModel: AuthenticationViewModel) {
                     is Screen.signinScreen -> SignInScreen(authenticationViewModel)
                     is Screen.mapsScreen -> GoogleMaps(authenticationViewModel)
                     is Screen.dashboardScreen -> DashBoardScreen(authenticationViewModel)
+                    is Screen.notesScreen -> NotesScreen()
 
                 }
 

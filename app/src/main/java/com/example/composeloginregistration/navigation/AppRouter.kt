@@ -9,6 +9,7 @@ sealed class Screen{
     object signinScreen: Screen()
     object dashboardScreen: Screen()
     object mapsScreen: Screen()
+    object notesScreen: Screen()
 }
 
 object AppRouter{

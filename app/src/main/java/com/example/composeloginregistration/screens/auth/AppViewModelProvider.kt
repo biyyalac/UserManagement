@@ -14,8 +14,9 @@ object AppViewModelProvider {
     val factory= viewModelFactory{
         initializer {
             val myRepository = (this[APPLICATION_KEY] as MyApplication).container.userRepositories
+            val myRemoteRepository = (this[APPLICATION_KEY] as MyApplication).container.userRemoteRepositories
            val application= (this[APPLICATION_KEY] as MyApplication)
-            AuthenticationViewModel(myRepository,application)
+            AuthenticationViewModel(myRepository,myRemoteRepository,application)
         }
 
     }
